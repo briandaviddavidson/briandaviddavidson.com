@@ -37,7 +37,7 @@ npx sass --no-source-map sass/portfolio.scss css/portfolio.css
 | Path | Source |
 |---|---|
 | `/` | This repo |
-| `/time-person-of-the-year/` | [time-person-of-the-year](https://github.com/briandaviddavidson/time-person-of-the-year), built with `yarn build` |
+| `/time/` | [time-person-of-the-year](https://github.com/briandaviddavidson/time-person-of-the-year), built with `yarn build` (`/time-person-of-the-year/` redirects here) |
 | `/google-dash/` | [google-dash](https://github.com/briandaviddavidson/google-dash), static demo built in browser-only storage mode |
 | `/nobel/` | [nobel-prize-winners](https://github.com/briandaviddavidson/nobel-prize-winners), Next.js static export built with `npm run build` |
 | `/projections/` | [projections](https://github.com/briandaviddavidson/projections), Maptime talk |
@@ -69,6 +69,6 @@ DNS is managed at Squarespace Domains.
 |---|---|
 | `briandaviddavidson.com` | This site (Firebase project `briandaviddavidson-site`) |
 | `www.briandaviddavidson.com` | Redirects to `briandaviddavidson.com` |
-| `time.briandaviddavidson.com` | Redirects to `/time-person-of-the-year/` (Firebase project `time-person-of-the-year`) |
+| `time.briandaviddavidson.com` | Redirects to `/time/` (Firebase project `time-person-of-the-year`) |
 
 GitHub Pages is turned off for this repo and the project repos; everything is served from `briandaviddavidson.com`.
