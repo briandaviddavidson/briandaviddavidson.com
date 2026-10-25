@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Assemble the whole site into dist/ for Firebase Hosting:
 #   /                          this repo (portfolio page)
-#   /time-person-of-the-year/  built from briandaviddavidson/time-person-of-the-year
+#   /time/                     built from briandaviddavidson/time-person-of-the-year
+#                              (/time-person-of-the-year/ redirects here; see firebase.json)
 #   /google-dash/              static demo of briandaviddavidson/google-dash (browser-only storage)
 #   /nobel/                    Next.js static export of briandaviddavidson/nobel-prize-winners
 #   /projections/, /git-and-github/, /d3-maptime/
@@ -49,10 +50,11 @@ for talk in "${TALKS[@]}"; do
   git -C "$WORK/$talk" archive HEAD | tar -x -C "$OUT/$talk"
 done
 
-echo "Building /time-person-of-the-year/"
+echo "Building /time/"
 git clone -q --depth 1 "https://github.com/$OWNER/time-person-of-the-year.git" "$WORK/time"
-(cd "$WORK/time" && yarn install --frozen-lockfile --silent && yarn -s build)
-cp -R "$WORK/time/build" "$OUT/time-person-of-the-year"
+# PUBLIC_URL sets the app's base path here, whatever `homepage` says in its package.json.
+(cd "$WORK/time" && yarn install --frozen-lockfile --silent && PUBLIC_URL=/time yarn -s build)
+cp -R "$WORK/time/build" "$OUT/time"
 
 echo "Building /nobel/"
 git clone -q --depth 1 "https://github.com/$OWNER/nobel-prize-winners.git" "$WORK/nobel"
