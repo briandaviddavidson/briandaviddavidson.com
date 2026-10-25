@@ -3,6 +3,7 @@
 #   /                          this repo (portfolio page)
 #   /time-person-of-the-year/  built from briandaviddavidson/time-person-of-the-year
 #   /google-dash/              static demo of briandaviddavidson/google-dash (browser-only storage)
+#   /nobel/                    Next.js static export of briandaviddavidson/nobel-prize-winners
 #   /projections/, /git-and-github/, /d3-maptime/
 #                              Maptime talk decks, from each repo's default branch
 set -euo pipefail
@@ -52,6 +53,13 @@ echo "Building /time-person-of-the-year/"
 git clone -q --depth 1 "https://github.com/$OWNER/time-person-of-the-year.git" "$WORK/time"
 (cd "$WORK/time" && yarn install --frozen-lockfile --silent && yarn -s build)
 cp -R "$WORK/time/build" "$OUT/time-person-of-the-year"
+
+echo "Building /nobel/"
+git clone -q --depth 1 "https://github.com/$OWNER/nobel-prize-winners.git" "$WORK/nobel"
+# The repo commits its processed data, so the build needs no network or keys; it
+# exports a static site already based at /nobel/.
+(cd "$WORK/nobel" && npm ci --silent --no-audit --no-fund && npm run build --silent)
+cp -R "$WORK/nobel/out" "$OUT/nobel"
 
 echo "Building /google-dash/"
 git clone -q --depth 1 "https://github.com/$OWNER/google-dash.git" "$WORK/google-dash"
