@@ -5,6 +5,7 @@
 #                              (/time-person-of-the-year/ redirects here; see firebase.json)
 #   /google-dash/              static demo of briandaviddavidson/google-dash (browser-only storage)
 #   /nobel/                    Next.js static export of briandaviddavidson/nobel-prize-winners
+#   /names/                    Next.js static export of briandaviddavidson/baby-names
 #   /projections/, /git-and-github/, /d3-maptime/
 #                              Maptime talk decks, from each repo's default branch
 set -euo pipefail
@@ -62,6 +63,13 @@ git clone -q --depth 1 "https://github.com/$OWNER/nobel-prize-winners.git" "$WOR
 # exports a static site already based at /nobel/.
 (cd "$WORK/nobel" && npm ci --silent --no-audit --no-fund && npm run build --silent)
 cp -R "$WORK/nobel/out" "$OUT/nobel"
+
+echo "Building /names/"
+git clone -q --depth 1 "https://github.com/$OWNER/baby-names.git" "$WORK/names"
+# Same as Nobel: processed data is committed, so no network or keys are needed,
+# and the export is already based at /names/.
+(cd "$WORK/names" && npm ci --silent --no-audit --no-fund && npm run build --silent)
+cp -R "$WORK/names/out" "$OUT/names"
 
 echo "Building /google-dash/"
 git clone -q --depth 1 "https://github.com/$OWNER/google-dash.git" "$WORK/google-dash"
