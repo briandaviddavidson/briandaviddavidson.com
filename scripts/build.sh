@@ -6,6 +6,8 @@
 #   /google-dash/              static demo of briandaviddavidson/google-dash (browser-only storage)
 #   /nobel/                    Next.js static export of briandaviddavidson/nobel-prize-winners
 #   /names/                    Next.js static export of briandaviddavidson/baby-names
+#   /redistricting/            Vite build of briandaviddavidson/redistricting (private repo,
+#                              cloned over SSH; unlisted: no card, no sitemap entry)
 #   /projections/, /git-and-github/, /d3-maptime/
 #                              Maptime talk decks, from each repo's default branch
 set -euo pipefail
@@ -70,6 +72,20 @@ git clone -q --depth 1 "https://github.com/$OWNER/baby-names.git" "$WORK/names"
 # and the export is already based at /names/.
 (cd "$WORK/names" && npm ci --silent --no-audit --no-fund && npm run build --silent)
 cp -R "$WORK/names/out" "$OUT/names"
+
+echo "Building /redistricting/"
+# Private repo, so clone over SSH with your own GitHub credentials. Processed data
+# is committed, so no network or data keys are needed. The Google map in chart 4 is
+# optional: set REDISTRICTING_MAPS_KEY (restricted to briandaviddavidson.com/redistricting/*)
+# and REDISTRICTING_MAP_ID to enable it; otherwise the page draws its SVG map.
+git clone -q --depth 1 "git@github.com:$OWNER/redistricting.git" "$WORK/redistricting"
+(
+  cd "$WORK/redistricting"
+  npm ci --silent --no-audit --no-fund
+  VITE_GOOGLE_MAPS_API_KEY="${REDISTRICTING_MAPS_KEY:-}" \
+  VITE_GOOGLE_MAPS_MAP_ID="${REDISTRICTING_MAP_ID:-}" \
+    npx vite build --base /redistricting/ --outDir "$OLDPWD/$OUT/redistricting" --emptyOutDir --logLevel warn
+)
 
 echo "Building /google-dash/"
 git clone -q --depth 1 "https://github.com/$OWNER/google-dash.git" "$WORK/google-dash"
