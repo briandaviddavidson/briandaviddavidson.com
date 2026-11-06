@@ -41,6 +41,7 @@ npx sass --no-source-map sass/portfolio.scss css/portfolio.css
 | `/google-dash/` | [google-dash](https://github.com/briandaviddavidson/google-dash), static demo built in browser-only storage mode |
 | `/nobel/` | [nobel-prize-winners](https://github.com/briandaviddavidson/nobel-prize-winners), Next.js static export built with `npm run build` |
 | `/names/` | [baby-names](https://github.com/briandaviddavidson/baby-names), Next.js static export built with `npm run build` |
+| `/oscars/` | [best-picture](https://github.com/briandaviddavidson/best-picture), Vite build with `--base /oscars/` |
 | `/redistricting/` | [redistricting](https://github.com/briandaviddavidson/redistricting) (private), Vite build. **Unlisted:** no card and no sitemap entry; shared by link only |
 | `/projections/` | [projections](https://github.com/briandaviddavidson/projections), Maptime talk |
 | `/git-and-github/` | [git-and-github](https://github.com/briandaviddavidson/git-and-github), Maptime talk |
@@ -55,7 +56,7 @@ The site is hosted on Firebase Hosting in the `briandaviddavidson-site` Google C
 npx firebase-tools deploy --only hosting
 ```
 
-`build.sh` copies an explicit list of portfolio files into `dist/`, so nothing else in this repo is published. It then clones the project repos above and adds them under their paths, building the TIME app with Yarn and the Google Dash demo, Nobel site and baby names site with npm.
+`build.sh` copies an explicit list of portfolio files into `dist/`, so nothing else in this repo is published. It then clones the project repos above and adds them under their paths, building the TIME app with Yarn and the Google Dash demo, Nobel, baby names and Best Picture sites with npm.
 
 The redistricting repo is private, so `build.sh` clones it over SSH with your GitHub credentials. Its Google map is optional: set `REDISTRICTING_MAPS_KEY` (restricted to `briandaviddavidson.com/redistricting/*`) and `REDISTRICTING_MAP_ID` before running `build.sh`; without them the page uses its built-in SVG map.
 

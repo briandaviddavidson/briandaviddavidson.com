@@ -6,6 +6,7 @@
 #   /google-dash/              static demo of briandaviddavidson/google-dash (browser-only storage)
 #   /nobel/                    Next.js static export of briandaviddavidson/nobel-prize-winners
 #   /names/                    Next.js static export of briandaviddavidson/baby-names
+#   /oscars/                   Vite build of briandaviddavidson/best-picture
 #   /redistricting/            Vite build of briandaviddavidson/redistricting (private repo,
 #                              cloned over SSH; unlisted: no card, no sitemap entry)
 #   /projections/, /git-and-github/, /d3-maptime/
@@ -72,6 +73,16 @@ git clone -q --depth 1 "https://github.com/$OWNER/baby-names.git" "$WORK/names"
 # and the export is already based at /names/.
 (cd "$WORK/names" && npm ci --silent --no-audit --no-fund && npm run build --silent)
 cp -R "$WORK/names/out" "$OUT/names"
+
+echo "Building /oscars/"
+git clone -q --depth 1 "https://github.com/$OWNER/best-picture.git" "$WORK/oscars"
+# Processed data, findings and provider logos are committed, so the build needs no
+# network or keys. (Refresh streaming availability in that repo with npm run fetch-data.)
+(
+  cd "$WORK/oscars"
+  npm ci --silent --no-audit --no-fund
+  npx vite build --base /oscars/ --outDir "$OLDPWD/$OUT/oscars" --emptyOutDir --logLevel warn
+)
 
 echo "Building /redistricting/"
 # Private repo, so clone over SSH with your own GitHub credentials. Processed data
