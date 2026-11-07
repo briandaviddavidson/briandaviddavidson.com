@@ -470,3 +470,127 @@ a.row-detail {
     transition: none;
   }
 }
+
+// Section intro and "see all" links (homepage sections that lead to a page)
+.section-intro {
+  max-width: $measure;
+  margin: -4px 0 20px;
+  color: var(--muted);
+}
+
+.more-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Data-story cards: 2:1 screenshots, a muted "built with" line
+.stories {
+  @include above($bp-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &.teaser {
+    @include above($bp-tablet) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .project-body {
+      padding: 16px;
+    }
+
+    p {
+      font-size: 0.9375rem;
+    }
+  }
+
+  .project-media {
+    aspect-ratio: 2 / 1;
+  }
+
+  // Featured card: image fills its half of the row, whatever the text height
+  .project.featured .project-media {
+    @include above($bp-desktop) {
+      aspect-ratio: auto;
+    }
+
+    img {
+      object-position: left center;
+    }
+  }
+}
+
+.project-meta {
+  margin: -4px 0 10px;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.project h3 a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--accent-strong);
+    text-decoration: underline;
+  }
+}
+
+// Sub-page header (/stories/, /talks/)
+.page-header {
+  padding: 32px 0 8px;
+
+  @include above($bp-tablet) {
+    padding: 48px 0 8px;
+  }
+
+  .home-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+
+  h1 {
+    font-size: 2rem;
+
+    @include above($bp-tablet) {
+      font-size: 2.5rem;
+    }
+  }
+
+  p {
+    max-width: $measure;
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 1.125rem;
+  }
+}
+
+.list-subhead {
+  font-size: 1rem;
+  margin: 28px 0 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+// Several headed lists in one section (/talks/)
+.section > .wrap > ul + h2 {
+  margin-top: 40px;
+}

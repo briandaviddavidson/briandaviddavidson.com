@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W0D5DVXDCR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-W0D5DVXDCR');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data stories · Brian Davidson</title>
+  <meta name="description" content="Interactive data stories by Brian Davidson, built with Claude: Spelling Bee champions, Best Picture winners, U.S. baby names, Nobel laureates, and TIME Person of the Year.">
+  <link rel="canonical" href="https://briandaviddavidson.com/stories/">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f4f6f8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#11161c" media="(prefers-color-scheme: dark)">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Brian Davidson">
+  <meta property="og:title" content="Data stories · Brian Davidson">
+  <meta property="og:description" content="Interactive data stories built with Claude, each with every chart's takeaway computed from the data.">
+  <meta property="og:url" content="https://briandaviddavidson.com/stories/">
+  <meta property="og:image" content="https://briandaviddavidson.com/images/social-card.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/images/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preload" href="/fonts/montserrat-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/portfolio.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="page-header">
+    <div class="wrap">
+      <a class="home-link" href="/">← Brian Davidson</a>
+      <h1>Data stories</h1>
+      <p>Interactive stories about well-known datasets, each built with Claude to show how quickly an idea can become a finished, sourced site. Every chart's takeaway is computed from the data, not written by hand.</p>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section" aria-label="All data stories">
+      <div class="wrap">
+        <ul class="projects stories">
+          <li class="project featured">
+            <div class="project-media">
+              <picture>
+                <source type="image/webp" srcset="/images/spelling-bee-640.webp 640w, /images/spelling-bee-1000.webp 1000w" sizes="(min-width: 900px) 500px, (min-width: 720px) 680px, calc(100vw - 32px)">
+                <img src="/images/spelling-bee-1000.jpg" width="1000" height="500" alt="Spelled to Victory: the 2026 winning word, bromocriptine, spelled out in gold letter tiles on a navy stage above counts of 98 Bees and 111 champions" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="project-body">
+              <h3><a href="/spelling-bee/" target="_blank" rel="noopener">Spelled to Victory</a></h3>
+              <p class="project-meta">Vite · Observable Plot · Nov 2026</p>
+              <p>Every Scripps National Spelling Bee champion since 1925: winning words that have left everyday English, a field that grew from 9 spellers to 567, a prize that lost most of its value for 60 years, and the former champions who now judge and pronounce. Then hear a winning word, ask for a definition or a sentence, and try to spell it.</p>
+              <ul class="project-links">
+                <li><a href="/spelling-bee/" target="_blank" rel="noopener">View story</a></li>
+                <li><a href="https://github.com/briandaviddavidson/spelling-bee" target="_blank" rel="noopener">Code</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="project">
+            <div class="project-media">
+              <picture>
+                <source type="image/webp" srcset="/images/oscars-640.webp 640w, /images/oscars-1000.webp 1000w" sizes="(min-width: 720px) 460px, calc(100vw - 32px)">
+                <img src="/images/oscars-1000.jpg" width="1000" height="500" alt="The Envelope, Please: a where-to-watch picker on a black and gold page, with Paramount+ and HBO Max ticked and 26 of 98 Best Picture winners included with them" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="project-body">
+              <h3><a href="/oscars/" target="_blank" rel="noopener">The Envelope, Please</a></h3>
+              <p class="project-meta">Vite · Observable Plot · Nov 2026</p>
+              <p>All 621 Best Picture nominees since the first Academy Awards: the five names the prize has had, how long winners run, whether box office matters, and which winners people still look up. Tick the streaming services you have to see which of the 98 winners you can watch tonight.</p>
+              <ul class="project-links">
+                <li><a href="/oscars/" target="_blank" rel="noopener">View story</a></li>
+                <li><a href="https://github.com/briandaviddavidson/best-picture" target="_blank" rel="noopener">Code</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="project">
+            <div class="project-media">
+              <picture>
+                <source type="image/webp" srcset="/images/names-640.webp 640w, /images/names-1000.webp 1000w" sizes="(min-width: 720px) 460px, calc(100vw - 32px)">
+                <img src="/images/names-1000.jpg" width="1000" height="500" alt="What We Name Our Babies state map for Mary in 2025: U.S. states shaded pink by how popular the name is, darkest in Alabama and Mississippi" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="project-body">
+              <h3><a href="/names/" target="_blank" rel="noopener">What We Name Our Babies</a></h3>
+              <p class="project-meta">Next.js · Observable Plot · Oct 2026</p>
+              <p>Every U.S. baby name the Social Security Administration has on record since 1880. Look up any name, see which pop-culture spikes stuck, which names switched from boys to girls, and how names have grown more diverse, with a state map and year slider for any name.</p>
+              <ul class="project-links">
+                <li><a href="/names/" target="_blank" rel="noopener">View story</a></li>
+                <li><a href="https://github.com/briandaviddavidson/baby-names" target="_blank" rel="noopener">Code</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="project">
+            <div class="project-media">
+              <picture>
+                <source type="image/webp" srcset="/images/nobel-640.webp 640w, /images/nobel-1000.webp 1000w" sizes="(min-width: 720px) 460px, calc(100vw - 32px)">
+                <img src="/images/nobel-1000.jpg" width="1000" height="500" alt="Who Wins the Nobel map: colored arcs across a dark world map from each laureate's birthplace to where they did their prize-winning work, converging on the United States and Western Europe" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="project-body">
+              <h3><a href="/nobel/" target="_blank" rel="noopener">Who Wins the Nobel</a></h3>
+              <p class="project-meta">Next.js · Observable Plot · deck.gl · Oct 2026</p>
+              <p>Every Nobel Prize since 1901: who wins, how old they are, where they come from, and how that has changed. Six charts, a 3D map of laureates' moves from birthplace to prize-winning work, and a portrait and Wikipedia link for every laureate.</p>
+              <ul class="project-links">
+                <li><a href="/nobel/" target="_blank" rel="noopener">View story</a></li>
+                <li><a href="https://github.com/briandaviddavidson/nobel-prize-winners" target="_blank" rel="noopener">Code</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="project">
+            <div class="project-media">
+              <picture>
+                <source type="image/webp" srcset="/images/time-640.webp 640w, /images/time-1000.webp 1000w" sizes="(min-width: 720px) 460px, calc(100vw - 32px)">
+                <img src="/images/time-1000.jpg" width="1000" height="502" alt="TIME Person of the Year app, showing the title page and a world map shaded by how many honorees each country has produced" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="project-body">
+              <h3><a href="/time/" target="_blank" rel="noopener">TIME Person of the Year</a></h3>
+              <p class="project-meta">React · D3 · Oct 2026</p>
+              <p>Every TIME Person of the Year honoree from 1927 to 2025, in a sortable table and five interactive charts: a world map by country, a streamgraph of categories, a timeline of the honor's wording, an age-at-honor beeswarm, and repeat honorees.</p>
+              <ul class="project-links">
+                <li><a href="/time/" target="_blank" rel="noopener">View story</a></li>
+                <li><a href="https://github.com/briandaviddavidson/time-person-of-the-year" target="_blank" rel="noopener">Code</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">© 2026 Brian Davidson · <a href="/">Home</a> · <a href="/talks/">Talks</a></div>
+  </footer>
+</body>
+</html>

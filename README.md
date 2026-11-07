@@ -1,12 +1,14 @@
 # briandaviddavidson.com
 
-Source for my personal portfolio site, [briandaviddavidson.com](https://briandaviddavidson.com). The portfolio is a single static page: plain HTML, with styles written in Sass. A small build script also pulls in my other projects so everything is served from one domain.
+Source for my personal portfolio site, [briandaviddavidson.com](https://briandaviddavidson.com). The portfolio is a few static pages (home, `/stories/`, `/talks/`): plain HTML, with styles written in Sass. A small build script also pulls in my other projects so everything is served from one domain.
 
 ## Layout
 
 | Path | What it is |
 |---|---|
-| `index.html` | The site |
+| `index.html` | The homepage |
+| `stories/index.html` | All data stories; the homepage shows the three newest. Add a card to both when you ship a new story |
+| `talks/index.html` | Conference talks and Maptime slide decks |
 | `sass/portfolio.scss` | Styles (source) |
 | `css/portfolio.css` | Compiled styles; commit it alongside the Sass |
 | `fonts/montserrat-700-latin.woff2` | Self-hosted heading font (cached for a year: rename the file if you replace it) |
@@ -36,9 +38,9 @@ npx sass --no-source-map sass/portfolio.scss css/portfolio.css
 
 | Path | Source |
 |---|---|
-| `/` | This repo |
+| `/`, `/stories/`, `/talks/` | This repo |
+| `/google-dash/` | Retired; 301-redirects to `/` (see `firebase.json`) |
 | `/time/` | [time-person-of-the-year](https://github.com/briandaviddavidson/time-person-of-the-year), built with `yarn build` (`/time-person-of-the-year/` redirects here) |
-| `/google-dash/` | [google-dash](https://github.com/briandaviddavidson/google-dash), static demo built in browser-only storage mode |
 | `/nobel/` | [nobel-prize-winners](https://github.com/briandaviddavidson/nobel-prize-winners), Next.js static export built with `npm run build` |
 | `/names/` | [baby-names](https://github.com/briandaviddavidson/baby-names), Next.js static export built with `npm run build` |
 | `/oscars/` | [best-picture](https://github.com/briandaviddavidson/best-picture), Vite build with `--base /oscars/` |
@@ -58,11 +60,11 @@ The site is hosted on Firebase Hosting in the `briandaviddavidson-site` Google C
 npx firebase-tools deploy --only hosting
 ```
 
-`build.sh` copies an explicit list of portfolio files into `dist/`, so nothing else in this repo is published. It then clones the project repos above and adds them under their paths, building the TIME app with Yarn and the Google Dash demo, Nobel, baby names, Best Picture and Spelling Bee sites with npm.
+`build.sh` copies an explicit list of portfolio files into `dist/`, so nothing else in this repo is published. It then clones the project repos above and adds them under their paths, building the TIME app with Yarn and the Nobel, baby names, Best Picture and Spelling Bee sites with npm.
 
 The redistricting and cherry-blossoms repos are private, so `build.sh` clones them over SSH with your GitHub credentials. Its Google map is optional: set `REDISTRICTING_MAPS_KEY` (restricted to `briandaviddavidson.com/redistricting/*`) and `REDISTRICTING_MAP_ID` before running `build.sh`; without them the page uses its built-in SVG map.
 
-The Google Dash demo needs its Maps API key (project `briandavidson-dash-demo`, restricted to `briandaviddavidson.com/google-dash/*`, with daily quota caps). `build.sh` looks it up with `gcloud`; if gcloud's active account can't read that project, run `GCLOUD_ACCOUNT=<your account> ./scripts/build.sh`, or pass the key directly as `GOOGLE_DASH_MAPS_KEY`. The key is never committed. Rerun it whenever any of those repos change. Before a risky change, deploy to a temporary preview URL first:
+Rerun it whenever any of those repos change. Before a risky change, deploy to a temporary preview URL first:
 
 ```sh
 npx firebase-tools hosting:channel:deploy preview --expires 1h

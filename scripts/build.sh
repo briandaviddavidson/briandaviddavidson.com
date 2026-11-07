@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Assemble the whole site into dist/ for Firebase Hosting:
 #   /                          this repo (portfolio page)
+#   /stories/, /talks/         this repo (index pages for data stories and talks)
 #   /time/                     built from briandaviddavidson/time-person-of-the-year
 #                              (/time-person-of-the-year/ redirects here; see firebase.json)
-#   /google-dash/              static demo of briandaviddavidson/google-dash (browser-only storage)
 #   /nobel/                    Next.js static export of briandaviddavidson/nobel-prize-winners
 #   /names/                    Next.js static export of briandaviddavidson/baby-names
 #   /oscars/                   Vite build of briandaviddavidson/best-picture
@@ -21,20 +21,6 @@ OWNER=briandaviddavidson
 OUT=dist
 TALKS=(projections git-and-github d3-maptime)
 
-# Google Dash demo: Maps key restricted to briandaviddavidson.com/google-dash/*.
-# Pass GOOGLE_DASH_MAPS_KEY, or let gcloud look it up (set GCLOUD_ACCOUNT to pick
-# the account that can read the briandavidson-dash-demo project).
-GDASH_PROJECT=briandavidson-dash-demo
-GDASH_KEY_NAME="Google Dash public demo"
-if [[ -z "${GOOGLE_DASH_MAPS_KEY:-}" ]]; then
-  gcloud_args=(--project="$GDASH_PROJECT")
-  [[ -n "${GCLOUD_ACCOUNT:-}" ]] && gcloud_args+=(--account="$GCLOUD_ACCOUNT")
-  key_name=$(gcloud services api-keys list "${gcloud_args[@]}" \
-    --filter="displayName=\"$GDASH_KEY_NAME\"" --format='value(name)' | head -1)
-  GOOGLE_DASH_MAPS_KEY=$(gcloud services api-keys get-key-string "$key_name" \
-    "${gcloud_args[@]}" --format='value(keyString)')
-fi
-
 WORK=$(mktemp -d)
 trap 'rm -rf "$WORK"' EXIT
 rm -rf "$OUT"
@@ -42,13 +28,13 @@ mkdir -p "$OUT"
 
 # Portfolio: an explicit list, so nothing else in the repo is published.
 cp -R index.html 404.html favicon.ico apple-touch-icon.png site.webmanifest robots.txt sitemap.xml \
-  Davidson_Thesis.pdf css fonts images "$OUT"/
+  Davidson_Thesis.pdf css fonts images stories talks "$OUT"/
 
 # Cache-bust the stylesheet: it's cached for a day, so give each version its
 # own URL. Otherwise a returning visitor can get new HTML with old CSS.
 css_hash=$(shasum "$OUT/css/portfolio.css" | cut -c1-10)
-sed -i.bak "s|css/portfolio.css\"|css/portfolio.css?v=$css_hash\"|" "$OUT/index.html" "$OUT/404.html"
-rm -f "$OUT"/*.bak
+sed -i.bak "s|css/portfolio.css\"|css/portfolio.css?v=$css_hash\"|" "$OUT/index.html" "$OUT/404.html" "$OUT/stories/index.html" "$OUT/talks/index.html"
+rm -f "$OUT"/*.bak "$OUT"/stories/*.bak "$OUT"/talks/*.bak
 
 for talk in "${TALKS[@]}"; do
   echo "Adding /$talk/"
@@ -124,20 +110,6 @@ git clone -q --depth 1 "git@github.com:$OWNER/cherry-blossoms.git" "$WORK/cherry
   cd "$WORK/cherry-blossoms"
   npm ci --silent --no-audit --no-fund
   npx vite build --base /cherry-blossoms/ --outDir "$OLDPWD/$OUT/cherry-blossoms" --emptyOutDir --logLevel warn
-)
-
-echo "Building /google-dash/"
-git clone -q --depth 1 "https://github.com/$OWNER/google-dash.git" "$WORK/google-dash"
-(
-  cd "$WORK/google-dash"
-  npm ci --silent --no-audit --no-fund
-  VITE_STORAGE_MODE=local \
-  VITE_GOOGLE_MAPS_API_KEY="$GOOGLE_DASH_MAPS_KEY" \
-  VITE_TITLE="Google Dash" \
-  VITE_DESCRIPTION="A situational-awareness dashboard on Google Maps: drag in data layers, search places, and draw annotations." \
-  VITE_LOGO=logo.svg \
-  VITE_FAVICON=favicon.svg \
-    npx vite build --base /google-dash/ --outDir "$OLDPWD/$OUT/google-dash" --logLevel warn
 )
 
 echo "Built $OUT/ ($(du -sh "$OUT" | cut -f1))"
