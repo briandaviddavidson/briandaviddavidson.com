@@ -7,6 +7,7 @@
 #   /nobel/                    Next.js static export of briandaviddavidson/nobel-prize-winners
 #   /names/                    Next.js static export of briandaviddavidson/baby-names
 #   /oscars/                   Vite build of briandaviddavidson/best-picture
+#   /spelling-bee/             Vite build of briandaviddavidson/spelling-bee
 #   /redistricting/            Vite build of briandaviddavidson/redistricting (private repo,
 #                              cloned over SSH; unlisted: no card, no sitemap entry)
 #   /cherry-blossoms/          Vite build of briandaviddavidson/cherry-blossoms (private for now,
@@ -84,6 +85,20 @@ git clone -q --depth 1 "https://github.com/$OWNER/best-picture.git" "$WORK/oscar
   cd "$WORK/oscars"
   npm ci --silent --no-audit --no-fund
   npx vite build --base /oscars/ --outDir "$OLDPWD/$OUT/oscars" --emptyOutDir --logLevel warn
+)
+
+echo "Building /spelling-bee/"
+git clone -q --depth 1 "https://github.com/$OWNER/spelling-bee.git" "$WORK/spelling-bee"
+# Processed data and findings are committed, so the build needs no network, Python or
+# keys. The hometown map is optional: set SPELLING_BEE_MAPS_KEY (restricted to
+# briandaviddavidson.com/spelling-bee/*) and SPELLING_BEE_MAP_ID to use Google Maps;
+# otherwise the page draws its SVG map.
+(
+  cd "$WORK/spelling-bee"
+  npm ci --silent --no-audit --no-fund
+  VITE_GOOGLE_MAPS_API_KEY="${SPELLING_BEE_MAPS_KEY:-}" \
+  VITE_GOOGLE_MAPS_MAP_ID="${SPELLING_BEE_MAP_ID:-}" \
+    npx vite build --base /spelling-bee/ --outDir "$OLDPWD/$OUT/spelling-bee" --emptyOutDir --logLevel warn
 )
 
 echo "Building /redistricting/"

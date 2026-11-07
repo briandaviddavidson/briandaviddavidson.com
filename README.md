@@ -42,6 +42,7 @@ npx sass --no-source-map sass/portfolio.scss css/portfolio.css
 | `/nobel/` | [nobel-prize-winners](https://github.com/briandaviddavidson/nobel-prize-winners), Next.js static export built with `npm run build` |
 | `/names/` | [baby-names](https://github.com/briandaviddavidson/baby-names), Next.js static export built with `npm run build` |
 | `/oscars/` | [best-picture](https://github.com/briandaviddavidson/best-picture), Vite build with `--base /oscars/` |
+| `/spelling-bee/` | [spelling-bee](https://github.com/briandaviddavidson/spelling-bee), Vite build with `--base /spelling-bee/`. Optional Google map: set `SPELLING_BEE_MAPS_KEY` (restricted to `briandaviddavidson.com/spelling-bee/*`) and `SPELLING_BEE_MAP_ID`; without them it draws an SVG map |
 | `/redistricting/` | [redistricting](https://github.com/briandaviddavidson/redistricting) (private), Vite build. **Unlisted:** no card and no sitemap entry; shared by link only |
 | `/cherry-blossoms/` | [cherry-blossoms](https://github.com/briandaviddavidson/cherry-blossoms) (private), Vite build. **Unlisted until its spring 2027 launch:** no card and no sitemap entry |
 | `/projections/` | [projections](https://github.com/briandaviddavidson/projections), Maptime talk |
@@ -57,7 +58,7 @@ The site is hosted on Firebase Hosting in the `briandaviddavidson-site` Google C
 npx firebase-tools deploy --only hosting
 ```
 
-`build.sh` copies an explicit list of portfolio files into `dist/`, so nothing else in this repo is published. It then clones the project repos above and adds them under their paths, building the TIME app with Yarn and the Google Dash demo, Nobel, baby names and Best Picture sites with npm.
+`build.sh` copies an explicit list of portfolio files into `dist/`, so nothing else in this repo is published. It then clones the project repos above and adds them under their paths, building the TIME app with Yarn and the Google Dash demo, Nobel, baby names, Best Picture and Spelling Bee sites with npm.
 
 The redistricting and cherry-blossoms repos are private, so `build.sh` clones them over SSH with your GitHub credentials. Its Google map is optional: set `REDISTRICTING_MAPS_KEY` (restricted to `briandaviddavidson.com/redistricting/*`) and `REDISTRICTING_MAP_ID` before running `build.sh`; without them the page uses its built-in SVG map.
 
