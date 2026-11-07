@@ -9,6 +9,8 @@
 #   /oscars/                   Vite build of briandaviddavidson/best-picture
 #   /redistricting/            Vite build of briandaviddavidson/redistricting (private repo,
 #                              cloned over SSH; unlisted: no card, no sitemap entry)
+#   /cherry-blossoms/          Vite build of briandaviddavidson/cherry-blossoms (private for now,
+#                              cloned over SSH; unlisted until its spring 2027 launch)
 #   /projections/, /git-and-github/, /d3-maptime/
 #                              Maptime talk decks, from each repo's default branch
 set -euo pipefail
@@ -96,6 +98,17 @@ git clone -q --depth 1 "git@github.com:$OWNER/redistricting.git" "$WORK/redistri
   VITE_GOOGLE_MAPS_API_KEY="${REDISTRICTING_MAPS_KEY:-}" \
   VITE_GOOGLE_MAPS_MAP_ID="${REDISTRICTING_MAP_ID:-}" \
     npx vite build --base /redistricting/ --outDir "$OLDPWD/$OUT/redistricting" --emptyOutDir --logLevel warn
+)
+
+echo "Building /cherry-blossoms/"
+# Private repo for now, so clone over SSH like redistricting. Processed data and
+# findings are committed, so no network or keys are needed. Unlisted until launch
+# (spring 2027): no card and no sitemap entry; shared by link only.
+git clone -q --depth 1 "git@github.com:$OWNER/cherry-blossoms.git" "$WORK/cherry-blossoms"
+(
+  cd "$WORK/cherry-blossoms"
+  npm ci --silent --no-audit --no-fund
+  npx vite build --base /cherry-blossoms/ --outDir "$OLDPWD/$OUT/cherry-blossoms" --emptyOutDir --logLevel warn
 )
 
 echo "Building /google-dash/"
